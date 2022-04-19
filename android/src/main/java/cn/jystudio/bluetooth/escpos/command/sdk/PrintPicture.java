@@ -1,6 +1,7 @@
 package cn.jystudio.bluetooth.escpos.command.sdk;
 
 import android.graphics.*;
+import android.util.Log;
 
 import java.io.UnsupportedEncodingException;
 
@@ -60,6 +61,11 @@ public class PrintPicture {
         if(left>0){
             grayBitmap = pad(grayBitmap,left,0);
         }
+
+        int newWidth = grayBitmap.getWidth();
+        int newHeight =  grayBitmap.getHeight();
+
+        Log.i("[POS_PrintBMP]", "WIDTH: " + newWidth + ", HEIGHT: " + newHeight);
 
         byte[] dithered = thresholdToBWPic(grayBitmap);
 

@@ -398,21 +398,14 @@ public class RNBluetoothEscposPrinterModule extends ReactContextBaseJavaModule
             System.out.println("w:" + width + "h:"
                     + height);
 
-            int[] pixels = new int[width * height];
-            for (int y = 0; y < height; y++) {
-                for (int x = 0; x < width; x++) {
-                    if (bitMatrix.get(x, y)) {
-                        pixels[y * width + x] = 0xff000000;
-                    } else {
-                        pixels[y * width + x] = 0xffffffff;
-                    }
+            Bitmap bitmap = Bitmap.createBitmap(width, height,
+                Bitmap.Config.RGB_565);
+
+            for (int x = 0; x < width; x++) {
+                for (int y = 0; y < height; y++) {
+                    bitmap.setPixel(x, y, bitMatrix.get(x, y) ? 0xff000000 : 0xffffffff);
                 }
             }
-
-            Bitmap bitmap = Bitmap.createBitmap(width, height,
-                    Bitmap.Config.ARGB_8888);
-
-            bitmap.setPixels(pixels, 0, width, 0, 0, width, height);
 
             //TODO: may need a left padding to align center.
             byte[] data = PrintPicture.POS_PrintBMP(bitmap, size, 0, 0);
