@@ -1,14 +1,15 @@
+import { NativeModules, Platform } from "react-native";
 
-import { NativeModules } from 'react-native';
+const { BluetoothManager, BluetoothEscposPrinter, BluetoothTscPrinter } =
+  NativeModules;
 
-const { BluetoothManager, BluetoothEscposPrinter, BluetoothTscPrinter } = NativeModules;
-
-BluetoothTscPrinter.DIRECTION = {
+if (Platform.OS === "android") {
+  BluetoothTscPrinter.DIRECTION = {
     FORWARD: 0,
-    BACKWARD: 1
-};
+    BACKWARD: 1,
+  };
 
-BluetoothTscPrinter.DENSITY = {
+  BluetoothTscPrinter.DENSITY = {
     DNESITY0: 0,
     DNESITY1: 1,
     DNESITY2: 2,
@@ -24,10 +25,10 @@ BluetoothTscPrinter.DENSITY = {
     DNESITY12: 12,
     DNESITY13: 13,
     DNESITY14: 14,
-    DNESITY15: 15
-};
+    DNESITY15: 15,
+  };
 
-BluetoothTscPrinter.BARCODETYPE = {
+  BluetoothTscPrinter.BARCODETYPE = {
     CODE128: "128",
     CODE128M: "128M",
     EAN128: "EAN128",
@@ -56,9 +57,9 @@ BluetoothTscPrinter.BARCODETYPE = {
     MSIC: "MSIC",
     PLESSEY: "PLESSEY",
     ITF14: "ITF14",
-    EAN14: "EAN14"
-};
-BluetoothTscPrinter.FONTTYPE = {
+    EAN14: "EAN14",
+  };
+  BluetoothTscPrinter.FONTTYPE = {
     FONT_1: "1",
     FONT_2: "2",
     FONT_3: "3",
@@ -69,22 +70,21 @@ BluetoothTscPrinter.FONTTYPE = {
     FONT_8: "8",
     SIMPLIFIED_CHINESE: "TSS24.BF2",
     TRADITIONAL_CHINESE: "TST24.BF2",
-    KOREAN: "K"
-};
-BluetoothTscPrinter.EEC = {
+    KOREAN: "K",
+  };
+  BluetoothTscPrinter.EEC = {
     LEVEL_L: "L",
     LEVEL_M: "M",
     LEVEL_Q: "Q",
-    LEVEL_H: "H"
-
-};
-BluetoothTscPrinter.ROTATION = {
+    LEVEL_H: "H",
+  };
+  BluetoothTscPrinter.ROTATION = {
     ROTATION_0: 0,
     ROTATION_90: 90,
     ROTATION_180: 180,
-    ROTATION_270: 270
-};
- BluetoothTscPrinter.FONTMUL = {
+    ROTATION_270: 270,
+  };
+  BluetoothTscPrinter.FONTMUL = {
     MUL_1: 1,
     MUL_2: 2,
     MUL_3: 3,
@@ -94,41 +94,41 @@ BluetoothTscPrinter.ROTATION = {
     MUL_7: 7,
     MUL_8: 8,
     MUL_9: 9,
-    MUL_10: 10
-};
-BluetoothTscPrinter.BITMAP_MODE = {
+    MUL_10: 10,
+  };
+  BluetoothTscPrinter.BITMAP_MODE = {
     OVERWRITE: 0,
     OR: 1,
-    XOR: 2
-};
-BluetoothTscPrinter.PRINT_SPEED = {
-    SPEED1DIV5:1,
-    SPEED2:2,
-    SPEED3:3,
-    SPEED4:4
-};
-BluetoothTscPrinter.TEAR = {
-	ON:'ON',
-	OFF:'OFF'
-};
-BluetoothTscPrinter.READABLE = {
-  DISABLE: 0,
-  ENABLE: 1,
-};
+    XOR: 2,
+  };
+  BluetoothTscPrinter.PRINT_SPEED = {
+    SPEED1DIV5: 1,
+    SPEED2: 2,
+    SPEED3: 3,
+    SPEED4: 4,
+  };
+  BluetoothTscPrinter.TEAR = {
+    ON: "ON",
+    OFF: "OFF",
+  };
+  BluetoothTscPrinter.READABLE = {
+    DISABLE: 0,
+    ENABLE: 1,
+  };
 
-BluetoothEscposPrinter.DEVICE_WIDTH = {
+  BluetoothEscposPrinter.DEVICE_WIDTH = {
     WIDTH_58: 384,
     WIDTH_80: 576,
-};
+  };
 
-BluetoothEscposPrinter.ERROR_CORRECTION = {
+  BluetoothEscposPrinter.ERROR_CORRECTION = {
     L: 1,
     M: 0,
     Q: 3,
     H: 2,
-};
+  };
 
-BluetoothEscposPrinter.BARCODETYPE = {
+  BluetoothEscposPrinter.BARCODETYPE = {
     UPC_A: 65, // 11<=n<=12
     UPC_E: 66, // 11<=n<=12
     JAN13: 67, // 12<=n<=12
@@ -138,17 +138,22 @@ BluetoothEscposPrinter.BARCODETYPE = {
     CODABAR: 71, // 1<=n<=255
     CODE93: 72, // 1<=n<=255
     CODE128: 73, // 2<=n<=255
-};
+  };
 
-BluetoothEscposPrinter.ROTATION = {
+  BluetoothEscposPrinter.ROTATION = {
     OFF: 0,
     ON: 1,
-};
+  };
 
-BluetoothEscposPrinter.ALIGN = {
+  BluetoothEscposPrinter.ALIGN = {
     LEFT: 0,
     CENTER: 1,
     RIGHT: 2,
-};
+  };
+}
 
-module.exports = { BluetoothManager,BluetoothEscposPrinter, BluetoothTscPrinter };
+module.exports = {
+  BluetoothManager,
+  BluetoothEscposPrinter,
+  BluetoothTscPrinter,
+};
